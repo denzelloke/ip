@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class SHREK {
     public static void main(String[] args) {
-
+        String daLine = "________________________________________________________________________________";
         String logo =
                 """
                 
@@ -40,27 +40,35 @@ public class SHREK {
                    |_______/       |__|  |__|    | _| `._____|   |_______|   |__|\\__\\ 
                                                                                    
                 """;
-        System.out.println("________________________________________________________________________________");
+        System.out.println(daLine);
         System.out.println("Aye welcome to me swap lad!\n" + logo +"\nWha can I du fuh ya?");
-        System.out.println("________________________________________________________________________________\n");
+        System.out.println(daLine + "\n");
 
         /*ECHO*/
-        String input;
+        String[] input = new String[100]; 
         Scanner in = new Scanner(System.in);
-        input = in.nextLine();
+        int i = 0;
+        input[i] = in.nextLine();
 
-        while (!input.equals("bye")) {
+        while (!input[i].equals("bye")) {
 
-            System.out.println("\n________________________________________________________________________________");
-            System.out.println(input);
-            System.out.println("________________________________________________________________________________\n");
-
-            input = in.nextLine();
+            if (input[i].equals("list")) {
+                input[i] = null;
+                System.out.println("\n" + daLine);
+                for (int j=0 ; j<i ; j++) {
+                    System.out.println(j+1 + ". " + input[j]);
+                }
+                System.out.println("\n" + daLine);
+            }
+            else{
+                i++;    
+            }
+            input[i] = in.nextLine();
         }
 
-        System.out.println("\n________________________________________________________________________________");
+        System.out.println("\n" + daLine);
         System.out.println("Bye. Hope to see you again soon!");
-        System.out.println("________________________________________________________________________________\n");
+        System.out.println(daLine + "\n");
     }
 }
 
