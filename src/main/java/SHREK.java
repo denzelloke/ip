@@ -1,10 +1,12 @@
+
 import java.util.Scanner;
 
 public class SHREK {
+
     public static void main(String[] args) {
         String daLine = "________________________________________________________________________________";
-        String logo =
-                """
+        String logo
+                = """
                 
                 #                            ,.--------._                                            #
                 #                           /            ''.                                         #
@@ -41,29 +43,50 @@ public class SHREK {
                                                                                    
                 """;
         System.out.println(daLine);
-        System.out.println("Aye welcome to me swap lad!\n" + logo +"\nWha can I du fuh ya?");
+        System.out.println("Aye welcome to me swap lad!\n" + logo + "\nWha can I du fuh ya?");
         System.out.println(daLine + "\n");
 
-        /*ECHO*/
-        String[] input = new String[100]; 
+        String[] item = new String[100];
+        Boolean[] done = new Boolean[100];
+        for (int i = 0; i < 100; i++) {
+            done[i] = false;
+        }
+
         Scanner in = new Scanner(System.in);
         int i = 0;
-        input[i] = in.nextLine();
+        item[i] = in.nextLine();
 
-        while (!input[i].equals("bye")) {
+        while (!item[i].equals("bye")) {
 
-            if (input[i].equals("list")) {
-                input[i] = null;
+            if (item[i].equals("list")) {
+                item[i] = null;
                 System.out.println("\n" + daLine);
-                for (int j=0 ; j<i ; j++) {
-                    System.out.println(j+1 + ". " + input[j]);
+                for (int j = 0; j < i; j++) {
+                    System.out.print(j + 1 + ".");
+
+                    if (done[j]) {
+                        System.out.print("[X] ");
+                    }
+                    else {
+                        System.out.print("[ ] " );
+                    }
+                    System.out.println(item[j]);    
                 }
                 System.out.println("\n" + daLine);
+            } 
+            else if (item[i].startsWith("mark")) {
+                int x = Character.getNumericValue(item[i].charAt(5)) -1;
+                done[x] = true;
             }
-            else{
-                i++;    
+            else if (item[i].startsWith("unmark")) {
+                int x = Character.getNumericValue(item[i].charAt(7)) -1;
+                done[x] = false;
             }
-            input[i] = in.nextLine();
+             else {
+                i++;
+            }
+
+            item[i] = in.nextLine();
         }
 
         System.out.println("\n" + daLine);
@@ -71,4 +94,3 @@ public class SHREK {
         System.out.println(daLine + "\n");
     }
 }
-
