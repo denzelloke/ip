@@ -1,3 +1,6 @@
+import javax.swing.*;
+import java.util.Scanner;
+
 public class SHREK {
     public static void main(String[] args) {
 
@@ -39,8 +42,25 @@ public class SHREK {
                         "\n";
         System.out.println("________________________________________________________________________________");
         System.out.println("Hello! I'm\n" + logo +"\nWhat can I do for you?");
-        System.out.println("________________________________________________________________________________");
+        System.out.println("________________________________________________________________________________\n");
+
+        /*ECHO*/
+        String input;
+        Scanner in = new Scanner(System.in);
+        input = in.nextLine();
+
+        while (!input.equals("bye")) {
+
+            System.out.println("\n________________________________________________________________________________");
+            System.out.println(input);
+            System.out.println("________________________________________________________________________________\n");
+
+            input = in.nextLine();
+        }
+
+        System.out.println("\n________________________________________________________________________________");
         System.out.println("Bye. Hope to see you again soon!");
+        System.out.println("________________________________________________________________________________\n");
     }
 }
 
