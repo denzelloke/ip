@@ -1,4 +1,3 @@
-import javax.swing.*;
 import java.util.Scanner;
 
 public class SHREK {
@@ -41,7 +40,7 @@ public class SHREK {
                         "                                                                   " +
                         "\n";
         System.out.println("________________________________________________________________________________");
-        System.out.println("Hello! I'm\n" + logo +"\nWhat can I do for you?");
+        System.out.println("Aye welcome to me swap lad!\n" + logo +"\nWha can I du fuh ya?");
         System.out.println("________________________________________________________________________________\n");
 
         /*ECHO*/
