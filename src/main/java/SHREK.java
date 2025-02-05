@@ -1,10 +1,12 @@
 
 import java.util.Scanner;
 
-public class SHREK {
+public class Shrek {
 
     public static void main(String[] args) {
-        String daLine = "________________________________________________________________________________";
+        int MAX_TASKS = 100;
+        int indexOffset = 1;
+        String LINEBREAK = "________________________________________________________________________________";
         String logo
                 = """
                 
@@ -42,55 +44,67 @@ public class SHREK {
                    |_______/       |__|  |__|    | _| `._____|   |_______|   |__|\\__\\ 
                                                                                    
                 """;
-        System.out.println(daLine);
+        System.out.println(LINEBREAK);
         System.out.println("Aye welcome to me swap lad!\n" + logo + "\nWha can I du fuh ya?");
-        System.out.println(daLine + "\n");
+        System.out.println(LINEBREAK + "\n");
 
-        String[] item = new String[100];
-        Boolean[] done = new Boolean[100];
-        for (int i = 0; i < 100; i++) {
-            done[i] = false;
-        }
+        Task[] tasks = new Task[MAX_TASKS];
 
         Scanner in = new Scanner(System.in);
         int i = 0;
-        item[i] = in.nextLine();
+        String input = in.nextLine();
+        
+        while (!input.equals("bye")) {
 
-        while (!item[i].equals("bye")) {
+            //list
+            if (input.equals("list")) {
+                System.out.println("\n" + LINEBREAK);
 
-            if (item[i].equals("list")) {
-                item[i] = null;
-                System.out.println("\n" + daLine);
                 for (int j = 0; j < i; j++) {
-                    System.out.print(j + 1 + ".");
+                    System.out.print(j + indexOffset + ".");
 
-                    if (done[j]) {
-                        System.out.print("[X] ");
-                    }
-                    else {
-                        System.out.print("[ ] " );
-                    }
-                    System.out.println(item[j]);    
+                    System.out.println(tasks[j].output());    
                 }
-                System.out.println("\n" + daLine);
+
+                System.out.println("\n" + LINEBREAK);
             } 
-            else if (item[i].startsWith("mark")) {
-                int x = Character.getNumericValue(item[i].charAt(5)) -1;
-                done[x] = true;
-            }
-            else if (item[i].startsWith("unmark")) {
-                int x = Character.getNumericValue(item[i].charAt(7)) -1;
-                done[x] = false;
-            }
-             else {
-                i++;
+
+            //mark
+            else if (input.startsWith("mark")) {
+                try {
+                    int positionOfIndex = 5; // "mark x"
+                    int indexToMark = Character.getNumericValue(input.charAt(positionOfIndex)) - indexOffset;
+                    tasks[indexToMark].markTask();
+                }
+                catch (Exception e) {
+                    System.out.println("Invalid index! heres an example: mark 1");
+                }
             }
 
-            item[i] = in.nextLine();
+            //unmark
+            else if (input.startsWith("unmark")) {
+                try {
+                    int positionOfIndex = 7; // "unmark x"
+                    int indexToUnmark = Character.getNumericValue(input.charAt(positionOfIndex)) - indexOffset;
+                    tasks[indexToUnmark].unmarkTask();
+                }
+                catch (Exception e) {
+                    System.out.println("Invalid index! heres an example: unmark 1");
+                }
+            }
+
+            //normal entry
+             else {
+                tasks[i] = new Task(input);
+                i++;
+             }
+
+            //refresh input
+            input = in.nextLine();
         }
 
-        System.out.println("\n" + daLine);
+        System.out.println("\n" + LINEBREAK);
         System.out.println("Bye. Hope to see you again soon!");
-        System.out.println(daLine + "\n");
+        System.out.println(LINEBREAK + "\n");
     }
 }
