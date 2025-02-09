@@ -1,33 +1,19 @@
 
 public class Task {
 
-    private String name;
+    private final String name;
     private boolean isDone;
-    private String tag;
-    private String timeString;
 
-    /*
- //full constructor
-    public Task(String nameInput, String tagInput) {
-        this.name = nameInput;
-        this.isDone = false;
-        this.tag = tagInput;
-    }
-     */
     //standard constructor
     public Task(String nameInput) {
         this.name = nameInput;
         this.isDone = false;
-        this.tag = null;
-        this.timeString = null;
     }
 
     //empty constructor
     public Task() {
         this.name = null;
         this.isDone = false;
-        this.tag = null;
-        this.timeString = null;
     }
 
     public void markTask() {
@@ -46,21 +32,12 @@ public class Task {
         return isDone;
     }
 
-    public String output() {
-        String toPrint = "[";
-        toPrint += (tag == null ? " " : tag) + "]";
-        toPrint += (isDone ? "[X] " : "[ ] ");
-        toPrint += name;
-        if (tag == null || tag.equals("T")) {
-            return toPrint; //no tag or T tag
-        }
-        if (tag.equals("D")) {
-            toPrint += " (by: " + timeString + ")";
-        } else if (tag.equals("E")) {
-            toPrint += " (from: " + timeString + ")";
-        }
-
-        return toPrint;
+    @Override
+    public String toString() {
+        String output = "";
+        output += (isDone ? "[X] " : "[ ] ");
+        output += name;
+        return output;
     }
 
     public static void markTask(Task[] tasks, String input, int indexOffset) {
@@ -84,32 +61,7 @@ public class Task {
     }
 
     /*
-    public void tagTask(String tag, String input) {
-        try {
-            String[] parsedInput = input.split(" ");
-            switch (parsedInput[0]) {
-            case ("todo"):
-                this.tag = "T";
-                break;
-            case ("deadline"):
-                this.tag = "D";
-                this.timeString = input.substring()
-                break;
-            case ("event"):
-                this.tag = "E";
-                break;
-            default:
-                System.out.println("INVALID INPUT!");
-            }
-            
-            this.name = parsedInput[1];
-
-        } catch (Exception e) {
-            System.out.println("INVALID INPUT");
-        }
-
-    }
-     */
+    
     public void tagTask(String tag, String input) {
         try {
             this.tag = tag;
@@ -145,5 +97,6 @@ public class Task {
         }
 
     }
-
+    
+    */
 }

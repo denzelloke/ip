@@ -20,42 +20,51 @@ public class Shrek {
             //list
             if (input.equals("list")) {
                 Printer.showList(tasks, taskIndex, indexOffset);
-            } //mark
+            } 
+            
+            //mark
             else if (input.startsWith("mark")) {
                 Task.markTask(tasks, input, indexOffset);
-            } //unmark
+            } 
+            
+            //unmark
             else if (input.startsWith("unmark")) {
                 Task.unmarkTask(tasks, input, indexOffset);
-            } //overload constructor for TDE
-            /*
-            else if (input.startsWith("todo") || input.startsWith("deadline") || input.startsWith("event")) {
+            } 
+            
+            //add
+            else {
                 tasks[taskIndex] = new Task();
-                tasks[taskIndex].tagTask(input);
-                Printer.acknowledge(tasks,taskIndex,indexOffset);
-                taskIndex++;
-            }
-
-            //normal entry
-             else {
-                tasks[taskIndex] = new Task(input);
-                Printer.acknowledge(tasks,taskIndex,indexOffset);
-                taskIndex++;
-             }
-
-             */ else {
-                tasks[taskIndex] = new Task();
+                
+                //todo
                 if (input.startsWith("todo ")) {
-                    tasks[taskIndex].tagTask("T", input);
-                }
+                    String[] nameTime = InPro.process(input);
+                    tasks[taskIndex] = new Todo(nameTime);
+                } 
+                
+                //deadline
                 else if (input.startsWith("deadline ")) {
-                    tasks[taskIndex].tagTask("D", input);
-                }
+
+                    try {
+                        String[] nameTime = InPro.process(input);
+                        tasks[taskIndex] = new Deadline(nameTime);
+                    } catch (Exception e) {
+                        System.err.println("INVALID DEADLINE FORMAT");
+                        break;
+                    }
+
+                } 
+                
+                //event
                 else if (input.startsWith("event ")) {
-                    tasks[taskIndex].tagTask("E", input);
-                }
+                    String[] nameTime = InPro.process(input);
+                    tasks[taskIndex] = new Event(nameTime);
+                } 
+                
+                //normal task
                 else {
-                tasks[taskIndex] = new Task(input);
-             }
+                    tasks[taskIndex] = new Task(input);
+                }
 
                 Printer.acknowledge(tasks, taskIndex, indexOffset);
                 taskIndex++;

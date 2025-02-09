@@ -58,7 +58,7 @@ public class Printer {
         for (int j = 0; j < taskIndex; j++) {
             System.out.print(j + indexOffset + ".");
 
-            System.out.println(tasks[j].output());
+            System.out.println(tasks[j].toString());
         }
 
         System.out.println(LINEBREAK + "\n");
@@ -67,7 +67,8 @@ public class Printer {
     public static void acknowledge(Task[] tasks, int taskIndex, int indexOffset) {
         System.out.println("\n" + LINEBREAK);
         System.out.println("Aye, got it lad! Here's your input");
-        System.out.println(tasks[taskIndex].output());
+        System.out.println(tasks[taskIndex].toString());
+        System.out.print("Yer now got " + (taskIndex+indexOffset) + " tasks in yer list");
         System.out.println(LINEBREAK + "\n");
     }
 }
