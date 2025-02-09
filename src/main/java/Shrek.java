@@ -9,7 +9,7 @@ public class Shrek {
 
         Task[] tasks = new Task[MAX_TASKS];
 
-        OutPro.greet();
+        Printer.greet();
 
         Scanner in = new Scanner(System.in);
         int taskIndex = 0;
@@ -19,7 +19,7 @@ public class Shrek {
 
             //list
             if (input.equals("list")) {
-                OutPro.showList(tasks, taskIndex, indexOffset);
+                Printer.showList(tasks, taskIndex, indexOffset);
             } //mark
             else if (input.startsWith("mark")) {
                 Task.markTask(tasks, input, indexOffset);
@@ -31,14 +31,14 @@ public class Shrek {
             else if (input.startsWith("todo") || input.startsWith("deadline") || input.startsWith("event")) {
                 tasks[taskIndex] = new Task();
                 tasks[taskIndex].tagTask(input);
-                OutPro.acknowledge(tasks,taskIndex,indexOffset);
+                Printer.acknowledge(tasks,taskIndex,indexOffset);
                 taskIndex++;
             }
 
             //normal entry
              else {
                 tasks[taskIndex] = new Task(input);
-                OutPro.acknowledge(tasks,taskIndex,indexOffset);
+                Printer.acknowledge(tasks,taskIndex,indexOffset);
                 taskIndex++;
              }
 
@@ -57,7 +57,7 @@ public class Shrek {
                 tasks[taskIndex] = new Task(input);
              }
 
-                OutPro.acknowledge(tasks, taskIndex, indexOffset);
+                Printer.acknowledge(tasks, taskIndex, indexOffset);
                 taskIndex++;
             }
 
@@ -65,6 +65,6 @@ public class Shrek {
             input = in.nextLine();
         }
 
-        OutPro.bye();
+        Printer.bye();
     }
 }

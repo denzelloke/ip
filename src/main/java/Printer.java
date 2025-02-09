@@ -1,5 +1,5 @@
 
-public class OutPro {
+public class Printer {
 
     public static String LINEBREAK = "________________________________________________________________________________";
     public static String logo
