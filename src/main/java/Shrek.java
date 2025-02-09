@@ -6,105 +6,65 @@ public class Shrek {
     public static void main(String[] args) {
         int MAX_TASKS = 100;
         int indexOffset = 1;
-        String LINEBREAK = "________________________________________________________________________________";
-        String logo
-                = """
-                
-                #                            ,.--------._                                            #
-                #                           /            ''.                                         #
-                #                         ,'                \\     |"\\                /\\          /\\  #
-                #                /"|     /                   \\    |__"              ( \\\\        // ) #
-                #               "_"|    /           z#####z   \\  //                  \\ \\\\      // /  #
-                #                 \\\\  #####        ##------".  \\//                    \\_\\\\||||//_/   #
-                #                  \\\\/-----\\     /          ".  \\                      \\/ _  _ \\     #
-                #                   \\|      \\   |   ,,--..       \\                    \\/|(O)(O)|     #
-                #                   | ,.--._ \\  (  | ##   \\)      \\                  \\/ |      |     #
-                #                   |(  ##  )/   \\ `-....-//       |///////////////_\\/  \\      /     #
-                #                     '--'."      \\                \\              //     |____|      #
-                #                  /'    /         ) --.            \\            ||     /      \\     #
-                #               ,..|     \\.________/    `-..         \\   \\       \\|     \\ 0  0 /     #
-                #            _,##/ |   ,/   /   \\           \\         \\   \\       U    / \\_//_/      #
-                #          :###.-  |  ,/   /     \\        /' ""\\      .\\        (     /              #
-                #         /####|   |   (.___________,---',/    |       |\\=._____|  |_/               #
-                #        /#####|   |     \\__|__|__|__|_,/             |####\\    |  ||                #
-                #       /######\\   \\      \\__________/                /#####|   \\  ||                #
-                #      /|#######`. `\\                                /#######\\   | ||                #
-                #     /++\\#########\\  \\                      _,'    _/#########\\ | ||                #
-                #    /++++|#########|  \\      .---..       ,/      ,'##########.\\|_||                #
-                #   //++++|#########\\.  \\.              ,-/      ,'########,+++++\\\\_\\\\               #
-                #  /++++++|##########\\.   '._        _,/       ,'######,''++++++++\\                  #
-                # |+++++++|###########|       -----."        _'#######' +++++++++++\\                 #
-                # |+++++++|############\\.     \\\\     //      /#######/++++       +++\\                #
-                #      ________________________\\\\___//______________________________________         #
-                        _______.    __    __     .______          _______     __  ___ 
-                       /       |   |  |  |  |    |   _  \\        |   ____|   |  |/  / 
-                      |   (----`   |  |__|  |    |  |_)  |       |  |__      |  '  /  
-                       \\   \\       |   __   |    |      /        |   __|     |    <   
-                   .----)   |      |  |  |  |    |  |\\  \\----.   |  |____    |  .  \\  
-                   |_______/       |__|  |__|    | _| `._____|   |_______|   |__|\\__\\ 
-                                                                                   
-                """;
-        System.out.println(LINEBREAK);
-        System.out.println("Aye welcome to me swap lad!\n" + logo + "\nWha can I du fuh ya?");
-        System.out.println(LINEBREAK + "\n");
 
         Task[] tasks = new Task[MAX_TASKS];
 
+        OutPro.greet();
+
         Scanner in = new Scanner(System.in);
-        int i = 0;
+        int taskIndex = 0;
         String input = in.nextLine();
-        
+
         while (!input.equals("bye")) {
 
             //list
             if (input.equals("list")) {
-                System.out.println("\n" + LINEBREAK);
-
-                for (int j = 0; j < i; j++) {
-                    System.out.print(j + indexOffset + ".");
-
-                    System.out.println(tasks[j].output());    
-                }
-
-                System.out.println("\n" + LINEBREAK);
-            } 
-
-            //mark
+                OutPro.showList(tasks, taskIndex, indexOffset);
+            } //mark
             else if (input.startsWith("mark")) {
-                try {
-                    int positionOfIndex = 5; // "mark x"
-                    int indexToMark = Character.getNumericValue(input.charAt(positionOfIndex)) - indexOffset;
-                    tasks[indexToMark].markTask();
-                }
-                catch (Exception e) {
-                    System.out.println("Invalid index! heres an example: mark 1");
-                }
-            }
-
-            //unmark
+                Task.markTask(tasks, input, indexOffset);
+            } //unmark
             else if (input.startsWith("unmark")) {
-                try {
-                    int positionOfIndex = 7; // "unmark x"
-                    int indexToUnmark = Character.getNumericValue(input.charAt(positionOfIndex)) - indexOffset;
-                    tasks[indexToUnmark].unmarkTask();
-                }
-                catch (Exception e) {
-                    System.out.println("Invalid index! heres an example: unmark 1");
-                }
+                Task.unmarkTask(tasks, input, indexOffset);
+            } //overload constructor for TDE
+            /*
+            else if (input.startsWith("todo") || input.startsWith("deadline") || input.startsWith("event")) {
+                tasks[taskIndex] = new Task();
+                tasks[taskIndex].tagTask(input);
+                OutPro.acknowledge(tasks,taskIndex,indexOffset);
+                taskIndex++;
             }
 
             //normal entry
              else {
-                tasks[i] = new Task(input);
-                i++;
+                tasks[taskIndex] = new Task(input);
+                OutPro.acknowledge(tasks,taskIndex,indexOffset);
+                taskIndex++;
              }
+
+             */ else {
+                tasks[taskIndex] = new Task();
+                if (input.startsWith("todo ")) {
+                    tasks[taskIndex].tagTask("T", input);
+                }
+                else if (input.startsWith("deadline ")) {
+                    tasks[taskIndex].tagTask("D", input);
+                }
+                else if (input.startsWith("event ")) {
+                    tasks[taskIndex].tagTask("E", input);
+                }
+                else {
+                tasks[taskIndex] = new Task(input);
+             }
+
+                OutPro.acknowledge(tasks, taskIndex, indexOffset);
+                taskIndex++;
+            }
 
             //refresh input
             input = in.nextLine();
         }
 
-        System.out.println("\n" + LINEBREAK);
-        System.out.println("Bye. Hope to see you again soon!");
-        System.out.println(LINEBREAK + "\n");
+        OutPro.bye();
     }
 }
