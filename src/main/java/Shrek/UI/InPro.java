@@ -1,4 +1,4 @@
-package UI; 
+package Shrek.UI;
 
 public class InPro {
 

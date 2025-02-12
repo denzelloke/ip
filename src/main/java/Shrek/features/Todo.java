@@ -1,4 +1,4 @@
-package features;
+package Shrek.features;
 
 public class Todo extends Task {
 

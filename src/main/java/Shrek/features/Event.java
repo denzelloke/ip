@@ -1,4 +1,5 @@
-package features;
+package Shrek.features;
+
 
 public class Event extends Task {
 

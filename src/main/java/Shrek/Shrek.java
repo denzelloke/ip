@@ -1,16 +1,16 @@
-import UI.InPro;
-import UI.Printer;
-import features.Deadline;
-import features.Event;
-import features.Task;
-import features.Todo;
+package Shrek;
+
+import Shrek.UI.InPro;
+import Shrek.UI.Printer;
+
+import Shrek.features.Deadline;
+import Shrek.features.Event;
+import Shrek.features.Task;
+import Shrek.features.Todo;
+
 
 import java.util.Scanner;
 
-import exceptions.InvalidNameException;
-import exceptions.InvalidSplitException;
-import exceptions.InvalidTagException;
-import exceptions.InvalidTimeException;
 public class Shrek {
 
     public static void main(String[] args) {
@@ -30,51 +30,40 @@ public class Shrek {
             //list
             if (input.equals("list")) {
                 Printer.showList(tasks, taskIndex, indexOffset);
-            } 
-            
-            //mark
+            } //mark
             else if (input.startsWith("mark")) {
                 Task.markTask(tasks, input, indexOffset);
-            } 
-            
-            //unmark
+            } //unmark
             else if (input.startsWith("unmark")) {
                 Task.unmarkTask(tasks, input, indexOffset);
-            } 
-            
-            //add
+            } //event
+            else if (input.startsWith("event ")) {
+                String[] nameTime = InPro.process(input);
+                tasks[taskIndex] = new Event(nameTime);
+            }
+            //ADD
             else {
-                tasks[taskIndex] = new Task();
-                
                 //todo
                 if (input.startsWith("todo ")) {
+                    tasks[taskIndex] = new Task();
                     String[] nameTime = InPro.process(input);
                     tasks[taskIndex] = new Todo(nameTime);
-                } 
-                
-                //deadline
+                } //deadline
                 else if (input.startsWith("deadline ")) {
-
                     try {
+                        tasks[taskIndex] = new Task();
                         String[] nameTime = InPro.process(input);
                         tasks[taskIndex] = new Deadline(nameTime);
                     } catch (Exception e) {
                         System.err.println("INVALID DEADLINE FORMAT");
                         break;
                     }
-
-                } 
-                
-                //event
-                else if (input.startsWith("event ")) {
-                    String[] nameTime = InPro.process(input);
-                    tasks[taskIndex] = new Event(nameTime);
-                } 
-                
-                //normal task
-                else {
-                    tasks[taskIndex] = new Task(input);
                 }
+                else {
+                    throw new Error("INVALID INPUT");
+                }
+            }
+
 
                 Printer.acknowledge(tasks, taskIndex, indexOffset);
                 taskIndex++;

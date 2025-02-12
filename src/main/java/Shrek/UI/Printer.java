@@ -1,5 +1,5 @@
-package UI; 
-import features.Task;
+package Shrek.UI;
+import Shrek.features.Task;
 public class Printer {
 
     public static String LINEBREAK = "________________________________________________________________________________";
