@@ -1,4 +1,5 @@
 package Shrek.features;
+import Shrek.exceptions.InvalidIndexException;
 
 public class Task {
 
@@ -41,24 +42,22 @@ public class Task {
         return output;
     }
 
-    public static void markTask(Task[] tasks, String input, int indexOffset) {
-        try {
+    public static void markTask(Task[] tasks, String input, int indexOffset) throws InvalidIndexException{
             int positionOfIndex = 5; // "mark x"
+            if (input.length() <= positionOfIndex ) {
+                throw new InvalidIndexException();
+            }
             int indexToMark = Character.getNumericValue(input.charAt(positionOfIndex)) - indexOffset;
             tasks[indexToMark].markTask();
-        } catch (Exception e) {
-            System.out.println("Invalid index! heres an example: mark 1");
-        }
     }
 
-    public static void unmarkTask(Task[] tasks, String input, int indexOffset) {
-        try {
+    public static void unmarkTask(Task[] tasks, String input, int indexOffset)  throws InvalidIndexException{
             int positionOfIndex = 7; // "unmark x"
+            if (input.length() <= positionOfIndex ) {
+                throw new InvalidIndexException();
+            }
             int indexToUnmark = Character.getNumericValue(input.charAt(positionOfIndex)) - indexOffset;
             tasks[indexToUnmark].unmarkTask();
-        } catch (Exception e) {
-            System.out.println("Invalid index! heres an example: unmark 1");
-        }
     }
 
     /*

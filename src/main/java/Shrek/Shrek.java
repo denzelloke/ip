@@ -12,6 +12,7 @@ import Shrek.exceptions.InvalidNameException;
 import Shrek.exceptions.InvalidSplitException;
 import Shrek.exceptions.InvalidTagException;
 import Shrek.exceptions.InvalidTimeException;
+import Shrek.exceptions.InvalidIndexException;
 
 
 import java.util.Scanner;
@@ -39,12 +40,12 @@ public class Shrek {
             } 
             
             //mark
-            else if (input.startsWith("mark")) {
+            else if (input.startsWith("mark ")) {
                 Task.markTask(tasks, input, indexOffset);
             } 
             
             //unmark
-            else if (input.startsWith("unmark")) {
+            else if (input.startsWith("unmark ")) {
                 Task.unmarkTask(tasks, input, indexOffset);
             }
             
@@ -90,6 +91,9 @@ public class Shrek {
             }
             catch (InvalidTimeException e) {
                 InvalidTimeException.handle();
+            }
+            catch (InvalidIndexException e) {
+                InvalidIndexException.handle();
             }
 
             //refresh input
