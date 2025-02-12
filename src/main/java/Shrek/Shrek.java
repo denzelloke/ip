@@ -8,12 +8,17 @@ import Shrek.features.Event;
 import Shrek.features.Task;
 import Shrek.features.Todo;
 
+import Shrek.exceptions.InvalidNameException;
+import Shrek.exceptions.InvalidSplitException;
+import Shrek.exceptions.InvalidTagException;
+import Shrek.exceptions.InvalidTimeException;
+
 
 import java.util.Scanner;
 
 public class Shrek {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InvalidTagException {
         int MAX_TASKS = 100;
         int indexOffset = 1;
 
@@ -27,46 +32,64 @@ public class Shrek {
 
         while (!input.equals("bye")) {
 
+            try {
             //list
             if (input.equals("list")) {
                 Printer.showList(tasks, taskIndex, indexOffset);
-            } //mark
+            } 
+            
+            //mark
             else if (input.startsWith("mark")) {
                 Task.markTask(tasks, input, indexOffset);
-            } //unmark
+            } 
+            
+            //unmark
             else if (input.startsWith("unmark")) {
                 Task.unmarkTask(tasks, input, indexOffset);
-            } //event
+            }
+            
+            //event
             else if (input.startsWith("event ")) {
                 String[] nameTime = InPro.process(input);
                 tasks[taskIndex] = new Event(nameTime);
+                Printer.acknowledge(tasks, taskIndex, indexOffset);
+                taskIndex++;
             }
-            //ADD
-            else {
-                //todo
-                if (input.startsWith("todo ")) {
+            
+            //todo
+            else if (input.startsWith("todo ")) {
                     tasks[taskIndex] = new Task();
                     String[] nameTime = InPro.process(input);
                     tasks[taskIndex] = new Todo(nameTime);
-                } //deadline
-                else if (input.startsWith("deadline ")) {
-                    try {
+                    Printer.acknowledge(tasks, taskIndex, indexOffset);
+                    taskIndex++;
+                } 
+            
+            //deadline
+            else if (input.startsWith("deadline ")) {
                         tasks[taskIndex] = new Task();
                         String[] nameTime = InPro.process(input);
                         tasks[taskIndex] = new Deadline(nameTime);
-                    } catch (Exception e) {
-                        System.err.println("INVALID DEADLINE FORMAT");
-                        break;
-                    }
+                        Printer.acknowledge(tasks, taskIndex, indexOffset);
+                        taskIndex++;
                 }
-                else {
-                    throw new Error("INVALID INPUT");
+            
+            //invalid input
+            else {
+                    throw new InvalidTagException();
                 }
             }
-
-
-                Printer.acknowledge(tasks, taskIndex, indexOffset);
-                taskIndex++;
+            catch (InvalidTagException e) {
+                InvalidTagException.handle();
+            }
+            catch (InvalidNameException e) {
+                InvalidNameException.handle();
+            }
+            catch (InvalidSplitException e) {
+                InvalidSplitException.handle();
+            }
+            catch (InvalidTimeException e) {
+                InvalidTimeException.handle();
             }
 
             //refresh input

@@ -1,8 +1,11 @@
-package exceptions;
+package Shrek.exceptions;
 
 public class InvalidSplitException extends Exception {
-    InvalidSplitException (String message) {
-        super(message);
-        System.out.println("DID YER CHECK YOUR /by AND /from INPUTS LAD?? \n");
+    public InvalidSplitException () {
+        super();
+    }
+
+    public static void handle() {
+        System.err.println("DID YER CHECK YOUR \"/by\" AND \"/from\" INPUTS LAD?? \n");
     }
 }

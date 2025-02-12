@@ -1,8 +1,10 @@
-package exceptions;
+package Shrek.exceptions;
 
 public class InvalidTagException extends Exception {
-    InvalidTagException(String message) {
-        super(message);
-        System.out.println("Here are the valid commands: \n1. deadline \n2. event \n3. todo \n4. list \n5.bye \n  KEEP TO EM LAD \n");
+    public InvalidTagException() {
+    }
+
+    public static void handle() {
+         System.err.println("\nC'mon Lad, here are the valid commands: \n1. deadline [description] /by [time] \n2. event [description] /from [time]\n3. todo [description] \n4. mark/unmark \n5. list \n6. bye \nKEEP TO EM LAD \n");
     }
 }

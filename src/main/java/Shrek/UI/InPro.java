@@ -1,15 +1,23 @@
 package Shrek.UI;
 
+import Shrek.exceptions.InvalidNameException;
+import Shrek.exceptions.InvalidSplitException;
+import Shrek.exceptions.InvalidTimeException;
+
 public class InPro {
 
-    public static String[] process(String input) {
+    public static String[] process(String input) throws InvalidNameException, InvalidTimeException, InvalidSplitException {
         String[] processedInput = new String[2];
-        int loc1 = -1, loc2 = -1, tagOffset = -1;
+        int nameIndex, splitIndex, tagOffset;
+        int indexOffset = 1;
 
         //case 1: todo
         if (input.startsWith("todo ")) {
-            loc1 = 5; //"T-O-D-O-X"
-            String name = input.substring(loc1);
+            nameIndex = 5; //"T-O-D-O-X"
+            if (input.length() <= nameIndex) {
+                throw new InvalidNameException();
+            }
+            String name = input.substring(nameIndex);
             processedInput[0] = name;
             processedInput[1] = null;
             return processedInput;
@@ -17,24 +25,16 @@ public class InPro {
 
         //case 2: deadline
         if (input.startsWith("deadline ")) {
-            loc1 = 8; //"D-E-A-D-L-I-N-E-X"    
-            loc2 = input.indexOf("/by ");
-            tagOffset = 4;
-
-            if (loc2 == -1) {
-                System.out.println("INVALID INPUT FOR DEADLINE: \"/by\" NOT FOUND");
-            }
+            nameIndex = 9; //"D-E-A-D-L-I-N-E-X-_"    
+            splitIndex = input.indexOf(" /by ");
+            tagOffset = 5; // _/by_
         } 
         
         //case 3: event
         else if (input.startsWith("event ")) {
-            loc1 = 5; //"E-V-E-N-T-X"   
-            loc2 = input.indexOf("/from ");
-            tagOffset = 6;
-
-            if (loc2 == -1) {
-                System.out.println("INVALID INPUT FOR EVENT: \"/from\" NOT FOUND");
-            }
+            nameIndex = 6; //"E-V-E-N-T-X-_"   
+            splitIndex = input.indexOf(" /from ");
+            tagOffset = 7; //_/from_
         } 
         
         //case 4: normal task
@@ -44,17 +44,25 @@ public class InPro {
             return processedInput;
         }
 
-        try {
-            String name = input.substring(loc1, loc2);
-            String time = input.substring(loc2 + tagOffset);
-            processedInput[0] = name;
-            processedInput[1] = time;
-
-        } catch (Exception e) {
-            return null;
+        //EXCEPTIONS
+        if (splitIndex == -1) {
+            //no /by found
+            throw new InvalidSplitException();
+        }
+        if (input.length() <= nameIndex || splitIndex == nameIndex - indexOffset) {
+            //"deadline [no name] /by [time]"
+            throw new InvalidNameException();
+        }
+        if (input.length() <= splitIndex + tagOffset) {
+            //"deadline [name] /by [no time]"
+            throw new InvalidTimeException();
         }
 
-        return processedInput;
+        String name = input.substring(nameIndex, splitIndex);
+        String time = input.substring(splitIndex + tagOffset);
+        processedInput[0] = name;
+        processedInput[1] = time;
 
+        return processedInput;
     }
 }

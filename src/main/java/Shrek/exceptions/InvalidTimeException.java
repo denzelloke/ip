@@ -1,8 +1,11 @@
-package exceptions;
+package Shrek.exceptions;
 
 public class InvalidTimeException extends Exception {
-    InvalidTimeException(String message) {
-        super(message);
-        System.out.println("INVALID TIME LAD, WHEN DO YER WANT TO SCHDULE THAT TASK?\n");
+    public InvalidTimeException() {
+        super();
+    }
+
+    public static void handle () {
+        System.err.println("INVALID TIME LAD, WHEN DO YER WANT TO SCHEDULE THAT TASK?\n");
     }
 }
