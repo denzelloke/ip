@@ -74,11 +74,11 @@ public class Printer {
         System.out.println("\n" + LINEBREAK + "\n");
     }
 
-    public static void ackDelete(Task[] tasks, int indexToDelete, int lastTaskIndex) {
+    public static void ackDelete(Task[] tasks, int indexToDelete, int tailIndex) {
         System.out.println("\n" + LINEBREAK);
         System.out.println("Aye, got it lad! Here's what I deleted");
         System.out.println(tasks[indexToDelete].toString());
-        System.out.print("Yer now got " + (lastTaskIndex+indexOffset) + " tasks in yer list");
+        System.out.print("Yer now got " + (tailIndex) + " tasks in yer list");
         System.out.println("\n" + LINEBREAK + "\n");
     }
 }

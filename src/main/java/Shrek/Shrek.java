@@ -2,6 +2,7 @@ package Shrek;
 
 import Shrek.UI.InPro;
 import Shrek.UI.Printer;
+import Shrek.exceptions.InvalidIndexException;
 import Shrek.exceptions.InvalidNameException;
 import Shrek.exceptions.InvalidSplitException;
 import Shrek.exceptions.InvalidTagException;
@@ -23,7 +24,7 @@ public class Shrek {
         Printer.greet();
 
         Scanner in = new Scanner(System.in);
-        int lastTaskIndex = 0;
+        int tailIndex = 0;
         String input = in.nextLine();
 
         while (!input.equals("bye")) {
@@ -31,7 +32,7 @@ public class Shrek {
             try {
             //list
             if (input.equals("list")) {
-                Printer.showList(tasks, lastTaskIndex);
+                Printer.showList(tasks, tailIndex);
             } 
             
             //mark
@@ -49,34 +50,33 @@ public class Shrek {
             //todo
             else if (input.startsWith("todo ")) {
                 String name = InPro.parseName(input);
-                tasks[lastTaskIndex] = new Todo(name);
-                Printer.acknowledge(tasks, lastTaskIndex);
-                lastTaskIndex++;
+                tasks[tailIndex] = new Todo(name);
+                Printer.acknowledge(tasks, tailIndex);
+                tailIndex++;
             } 
             
             //deadline
             else if (input.startsWith("deadline ")) {
                 String[] nameTime = InPro.parseNameTime(input, 0); //0 for deadline
-                tasks[lastTaskIndex] = new Deadline(nameTime);
-                Printer.acknowledge(tasks, lastTaskIndex);
-                lastTaskIndex++;
+                tasks[tailIndex] = new Deadline(nameTime);
+                Printer.acknowledge(tasks, tailIndex);
+                tailIndex++;
             }
 
             //event
             else if (input.startsWith("event ")) {
                 String[] nameTime = InPro.parseNameTime(input, 1); //1 for event
-                tasks[lastTaskIndex] = new Event(nameTime);
-                Printer.acknowledge(tasks, lastTaskIndex);
-                lastTaskIndex++;
+                tasks[tailIndex] = new Event(nameTime);
+                Printer.acknowledge(tasks, tailIndex);
+                tailIndex++;
             }
 
             //delete
             else if (input.startsWith("delete ")) {
-                    int indexToDelete = InPro.parseIndex(input);
-                    Task.deleteTask(tasks, indexToDelete);
-                    lastTaskIndex--;
-                    Printer.ackDelete(tasks, indexToDelete, lastTaskIndex);
-                    
+                tailIndex--;
+                int indexToDelete = InPro.parseIndex(input);
+                Printer.ackDelete(tasks, indexToDelete, tailIndex);
+                Task.deleteTask(tasks, indexToDelete);                                            
             }
             
             //invalid input
@@ -85,12 +85,7 @@ public class Shrek {
                 }
             }
 
-            catch (InvalidNameException | InvalidSplitException | InvalidTagException | InvalidTimeException e) {
-                InvalidTagException.handle();
-            }
 
-
-            /*
             catch (InvalidTagException e) {
                 InvalidTagException.handle();
             }
@@ -103,16 +98,9 @@ public class Shrek {
             catch (InvalidTimeException e) {
                 InvalidTimeException.handle();
             }
-            //catch (InvalidIndexException e ) {
-            //    InvalidIndexException.handle();
-            //}
-            //check on this
             catch (NumberFormatException e ) {
                 InvalidIndexException.handle();
             }
-
-
-             */
            
             //refresh input
             input = in.nextLine();
