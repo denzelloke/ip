@@ -2,6 +2,8 @@ package Shrek;
 
 import Shrek.UI.InPro;
 import Shrek.UI.Printer;
+import Shrek.data.LoadData;
+import Shrek.data.WriteData;
 import Shrek.exceptions.InvalidIndexException;
 import Shrek.exceptions.InvalidNameException;
 import Shrek.exceptions.InvalidSplitException;
@@ -15,15 +17,22 @@ import java.util.Scanner;
 
 public class Shrek {
 
+    private static final int MAX_TASKS = 100;
+    private static final String FILEPATH = "Shrek/save.txt";
+    private static Task[] tasks = new Task[MAX_TASKS];
+    private static int tailIndex = 0;
+
+    
+
     public static void main(String[] args) throws InvalidTagException, InvalidIndexException {
-        int MAX_TASKS = 100;
-
-        Task[] tasks = new Task[MAX_TASKS];
-
         Printer.greet();
 
+
+        LoadData load = new LoadData(tasks,tailIndex,FILEPATH);
+        tasks = load.loadOrCreateFile();
+
         Scanner in = new Scanner(System.in);
-        int tailIndex = 0;
+
         String input = in.nextLine();
 
         while (!input.equals("bye")) {
@@ -96,5 +105,10 @@ public class Shrek {
         }
 
         Printer.bye();
+        try {
+            WriteData.overwriteFile(FILEPATH, tasks);
+        } catch (Exception e) {
+        }
+        
     }
 }
