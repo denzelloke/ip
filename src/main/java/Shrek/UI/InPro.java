@@ -6,63 +6,73 @@ import Shrek.exceptions.InvalidTimeException;
 
 public class InPro {
 
-    public static String[] process(String input) throws InvalidNameException, InvalidTimeException, InvalidSplitException {
-        String[] processedInput = new String[2];
-        int nameIndex, splitIndex, tagOffset;
-        int indexOffset = 1;
+    public InPro() {
+    }
 
-        //case 1: todo
-        if (input.startsWith("todo ")) {
-            nameIndex = 5; //"T-O-D-O-X"
-            if (input.length() <= nameIndex) {
-                throw new InvalidNameException();
+    public static Object parse(String input, String command) throws InvalidNameException, InvalidSplitException, InvalidTimeException {
+        switch (command) {
+            case "todo" -> {
+                return parseName(input);
             }
-            String name = input.substring(nameIndex);
-            processedInput[0] = name;
-            processedInput[1] = null;
-            return processedInput;
-        }
 
-        //case 2: deadline
-        if (input.startsWith("deadline ")) {
-            nameIndex = 9; //"D-E-A-D-L-I-N-E-X-_"    
-            splitIndex = input.indexOf(" /by ");
-            tagOffset = 5; // _/by_
-        } 
-        
-        //case 3: event
-        else if (input.startsWith("event ")) {
-            nameIndex = 6; //"E-V-E-N-T-X-_"   
-            splitIndex = input.indexOf(" /from ");
-            tagOffset = 7; //_/from_
-        } 
-        
-        //case 4: normal task
-        else {
-            processedInput[0] = input;
-            processedInput[1] = null;
-            return processedInput;
-        }
+            case "deadline" -> {
+                return parseNameTime(input, 0);
+            }
 
-        //EXCEPTIONS
-        if (splitIndex == -1) {
-            //no /by found
-            throw new InvalidSplitException();
+            case "event" -> {
+                return parseNameTime(input, 1);
+            }
+
+            case "delete", "mark", "unmark" -> {
+                return parseIndex(input);
+            }
+            default -> throw new IllegalArgumentException("Invalid command: " + command);
         }
-        if (input.length() <= nameIndex || splitIndex == nameIndex - indexOffset) {
-            //"deadline [no name] /by [time]"
+    }
+
+    public static String parseName(String input) throws InvalidNameException {
+        int nameIndex = 5; //"T-O-D-O-X"
+        if (input.length() <= nameIndex) {
             throw new InvalidNameException();
         }
-        if (input.length() <= splitIndex + tagOffset) {
-            //"deadline [name] /by [no time]"
-            throw new InvalidTimeException();
+        String name = input.substring(nameIndex);
+        return name;
+    }
+
+    public static String[] parseNameTime(String input, int command) throws InvalidSplitException, InvalidTimeException {
+        String[] nameTime = new String[2];
+
+        int nameIndex, splitIndex, tagOffset;
+
+        if (command == 0) { //command DEADLINE
+            nameIndex = 9;
+            splitIndex = input.indexOf(" /by ");
+            tagOffset = 5;
+        } else { // command EVENT
+            nameIndex = 6;
+            splitIndex = input.indexOf(" /from ");
+            tagOffset = 7;
         }
 
         String name = input.substring(nameIndex, splitIndex);
         String time = input.substring(splitIndex + tagOffset);
-        processedInput[0] = name;
-        processedInput[1] = time;
-
-        return processedInput;
+        nameTime[0] = name;
+        nameTime[1] = time;
+        return nameTime;
     }
+
+    public static int parseIndex(String input) {
+        int positionOfIndex = input.indexOf(" ");
+        String indexStr = input.substring(positionOfIndex + 1).trim(); // Extract the part after command
+        int index = Integer.parseInt(indexStr);
+        return index;
+    }
+
 }
+
+// into constructor, switch cases
+//switch cases into diff process functions
+//return type string, string[], int
+//todo -> name
+//deadline, event -> name, time
+//delete,mark,unmark -> index

@@ -1,8 +1,8 @@
 package Shrek.features;
-import Shrek.exceptions.InvalidIndexException;
 
 public class Task {
-
+    
+    public static int indexOffset = 1;
     private final String name;
     private boolean isDone;
 
@@ -42,61 +42,17 @@ public class Task {
         return output;
     }
 
-    public static void markTask(Task[] tasks, String input, int indexOffset) throws InvalidIndexException{
-            int positionOfIndex = 5; // "mark x"
-            if (input.length() <= positionOfIndex ) {
-                throw new InvalidIndexException();
-            }
-            int indexToMark = Character.getNumericValue(input.charAt(positionOfIndex)) - indexOffset;
+    public static void markTask(Task[] tasks, String input, int indexToMark) {
             tasks[indexToMark].markTask();
     }
 
-    public static void unmarkTask(Task[] tasks, String input, int indexOffset)  throws InvalidIndexException{
-            int positionOfIndex = 7; // "unmark x"
-            if (input.length() <= positionOfIndex ) {
-                throw new InvalidIndexException();
-            }
-            int indexToUnmark = Character.getNumericValue(input.charAt(positionOfIndex)) - indexOffset;
+    public static void unmarkTask(Task[] tasks, String input, int indexToUnmark)  {
             tasks[indexToUnmark].unmarkTask();
     }
-
-    /*
     
-    public void tagTask(String tag, String input) {
-        try {
-            this.tag = tag;
-            int loc1, loc2;
-            int byOffset = 4;
-            int fromOffset = 6;
-
-            switch (tag) {
-                case ("T") -> {
-                    loc1 = 5; //"T-O-D-O-X"
-                    this.name = this.timeString = input.substring(loc1);
-                }
-
-                case ("D") -> {
-                    loc1 = 8; //"D-E-A-D-L-I-N-E-X"
-                    loc2 = input.indexOf("/by ");
-                    this.name = input.substring(loc1, loc2);
-                    this.timeString = input.substring(loc2 + byOffset);
-                }
-
-                case ("E") -> {
-                    loc1 = 5; //"E-V-E-N-T-X"
-                    loc2 = input.indexOf("/from ");
-                    this.name = input.substring(loc1, loc2);
-                    this.timeString = input.substring(loc2 + fromOffset);
-                }
-
-                default ->
-                    System.out.println("INVALID INPUT! maybe you for");
-            }
-        } catch (Exception e) {
-            System.out.println("INVALID INPUT");
+    public static void deleteTask(Task[] tasks, int indexToDelete) {
+        for (int i=indexToDelete; i<tasks.length-indexOffset; i++) {
+            tasks[i] = tasks[i+1];
         }
-
     }
-    
-    */
 }

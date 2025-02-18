@@ -2,8 +2,8 @@ package Shrek.features;
 
 public class Todo extends Task {
 
-    public Todo(String[] input) {
-        super(input[0]);        
+    public Todo(String input) {
+        super(input);        
     }
 
 @Override

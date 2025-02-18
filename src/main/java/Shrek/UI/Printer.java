@@ -2,6 +2,7 @@ package Shrek.UI;
 import Shrek.features.Task;
 public class Printer {
 
+    static int indexOffset = 1;
     public static String LINEBREAK = "________________________________________________________________________________";
     public static String logo
             = """
@@ -53,7 +54,7 @@ public class Printer {
         System.out.println(LINEBREAK + "\n");
     }
 
-    public static void showList(Task[] tasks, int taskIndex, int indexOffset) {
+    public static void showList(Task[] tasks, int taskIndex) {
         System.out.println("\n" + LINEBREAK);
 
         for (int j = 0; j < taskIndex; j++) {
@@ -65,11 +66,19 @@ public class Printer {
         System.out.println(LINEBREAK + "\n");
     }
 
-    public static void acknowledge(Task[] tasks, int taskIndex, int indexOffset) {
+    public static void acknowledge(Task[] tasks, int taskIndex) {
         System.out.println("\n" + LINEBREAK);
         System.out.println("Aye, got it lad! Here's your input");
         System.out.println(tasks[taskIndex].toString());
         System.out.print("Yer now got " + (taskIndex+indexOffset) + " tasks in yer list");
+        System.out.println("\n" + LINEBREAK + "\n");
+    }
+
+    public static void ackDelete(Task[] tasks, int indexToDelete, int lastTaskIndex) {
+        System.out.println("\n" + LINEBREAK);
+        System.out.println("Aye, got it lad! Here's what I deleted");
+        System.out.println(tasks[indexToDelete].toString());
+        System.out.print("Yer now got " + (lastTaskIndex+indexOffset) + " tasks in yer list");
         System.out.println("\n" + LINEBREAK + "\n");
     }
 }
