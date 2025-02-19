@@ -6,6 +6,7 @@ public class Task {
     public static int indexOffset = 1;
     private final String name;
     private boolean isDone;
+    public static int tailIndex = 0;
 
     //standard constructor
     public Task(String nameInput) {
