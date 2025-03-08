@@ -25,9 +25,9 @@ replace [name] with the actual name of the task
 Example: `todo submit Shrek` 
 
 If no input errors have occurred, this is the expected output:
-> Aye, got it lad! Here's your input
-[T][ ] submit Shrek
-Yer now got 1 tasks in yer list
+> Aye, got it lad! Here's your input <br>
+[T][ ] submit Shrek <br>
+Yer now got 1 tasks in yer list <br>
 
 viewing `list` should also show that your changes have been implemented into the tasklist
 
@@ -42,9 +42,9 @@ replace [name] and [time] with the actual name and time of the task
 Example: `deadline submit Shrek /by Fri, Mar 14th 2359` 
 
 If no input errors have occurred, this is the expected output:
-> Aye, got it lad! Here's your input
-[D][ ] submit Shrek (by: Fri, Mar 14th 2359)
-Yer now got 2 tasks in yer list
+> Aye, got it lad! Here's your input <br>
+[D][ ] submit Shrek (by: Fri, Mar 14th 2359) <br>
+Yer now got 2 tasks in yer list <br>
 
 Viewing `list` should also show that your changes have been implemented into the tasklist
 
@@ -59,9 +59,9 @@ replace [name] and [time] with the actual name and time of the task
 Example: `event work on Shrek /from Today to Fri, Mar 14th 2359` 
 
 If no input errors have occurred, this is the expected output:
-> Aye, got it lad! Here's your input
-[E][ ] work on Shrek (from: Today to Fri, Mar 14th 2359)
-Yer now got 3 tasks in yer list
+> Aye, got it lad! Here's your input <br>
+[E][ ] work on Shrek (from: Today to Fri, Mar 14th 2359) <br>
+Yer now got 3 tasks in yer list <br>
 
 Viewing `list` should also show that your changes have been implemented into the tasklist
 
@@ -88,9 +88,9 @@ Enter `delete [index]` to delete the task
 Example: `delete 1`
 
 If no input errors have occurred, this is the expected output:
-> Aye, got it lad! Here's what I deleted
-[T][ ] submit Shrek
-Yer now got 2 tasks in yer list
+> Aye, got it lad! Here's what I deleted <br>
+[T][ ] submit Shrek <br>
+Yer now got 2 tasks in yer list <br>
 
 Viewing `list` should also show that your changes have been implemented into the tasklist
 
@@ -104,7 +104,7 @@ replace [key] with the actual name of the key.
 Example: `find Shrek` 
 
 If no input errors have occurred, this is the expected output:
-> HERE ARE ALL THE TASKS THAT CONTAIN "Shrek"
-1.[T][ ] submit Shrek
-2.[D][X] submit Shrek (by: Fri, Mar 14th 2359)
-3.[E][ ] work on Shrek (from: Today to Fri, Mar 14th 2359)
+> HERE ARE ALL THE TASKS THAT CONTAIN "Shrek" <br>
+1.[T][ ] submit Shrek <br>
+2.[D][X] submit Shrek (by: Fri, Mar 14th 2359) <br>
+3.[E][ ] work on Shrek (from: Today to Fri, Mar 14th 2359) <br>
