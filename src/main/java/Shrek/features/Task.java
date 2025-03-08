@@ -13,6 +13,8 @@
 
 package Shrek.features;
 
+import Shrek.UI.Printer;
+
 
 public class Task {
     
@@ -59,10 +61,12 @@ public class Task {
 
     public static void markTask(Task[] tasks, String input, int indexToMark) {
             tasks[indexToMark].markTask();
+            Printer.ackMark(indexToMark);
     }
 
     public static void unmarkTask(Task[] tasks, String input, int indexToUnmark)  {
             tasks[indexToUnmark].unmarkTask();
+            Printer.ackUnmark(indexToUnmark);
     }
     
     public static void deleteTask(Task[] tasks, int indexToDelete) {

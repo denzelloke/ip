@@ -107,6 +107,18 @@ public class Printer {
         System.out.println(LINEBREAK + "\n");
     }
 
+    public static void ackMark(int index) {
+        System.out.println(LINEBREAK);
+        System.out.println("Roger that! Consider task" + index + "marked");
+        System.out.println(LINEBREAK + "\n");
+    }
+
+    public static void ackUnmark(int index) {
+        System.out.println(LINEBREAK);
+        System.out.println("Roger that! Consider task" + index + "unmarked");
+        System.out.println(LINEBREAK + "\n");
+    }
+
     public static void printMatches(Task[] tasks, int taskIndex, String key) {
         System.out.println("\n" + LINEBREAK);
         System.out.println("HERE ARE ALL THE TASKS THAT CONTAIN \"" + key + "\"");
