@@ -115,7 +115,7 @@ public class Printer {
 
     public static void ackUnmark(int index) {
         System.out.println(LINEBREAK);
-        System.out.println("Roger that! Consider task" + index + "unmarked");
+        System.out.println("Roger that! Consider task " + (index+1) + "unmarked ");
         System.out.println(LINEBREAK + "\n");
     }
 
