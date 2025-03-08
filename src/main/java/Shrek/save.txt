@@ -1,8 +1,0 @@
-[D][ ] name (by: time1)
-[D][ ] name (by: time2)
-[D][ ] name (by: time3)
-[D][ ] name (by: time4)
-[D][ ] name (by: time5)
-[D][ ] name (by: time6)
-[D][ ] name (by: time7)
-[T][ ] HELLO

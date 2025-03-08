@@ -81,6 +81,18 @@ public class Printer {
         System.out.print("Yer now got " + (tailIndex) + " tasks in yer list");
         System.out.println("\n" + LINEBREAK + "\n");
     }
+
+     public static void errorMsg() {
+        System.out.println(LINEBREAK);
+        System.out.println("INVALID INPUT! TRY AGAIN");
+        System.out.println(LINEBREAK + "\n");
+    }
+
+     public static void ackSave() {
+        System.out.println(LINEBREAK);
+        System.out.println("Tasks saved successfully!");
+        System.out.println(LINEBREAK + "\n");
+    }
 }
 
 //
