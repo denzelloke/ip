@@ -1,10 +1,12 @@
-# Duke User Guide
+# Shrek User Guide
 
-// Update the title above to match the actual product namezzz
+![Shrek product image] (ShrekSS.png)
 
-// Product screenshot goes here
+Shrek is a simple command-line task manager that helps users organize their tasks efficiently. It supports adding, marking, deleting, and searching for tasks, including ToDos, Deadlines, and Events. Designed for a smooth CLI experience, Shrek ensures seamless task tracking and management.
 
-// Product intro goes here
+## Viewing existing tasks
+
+
 
 ## Adding deadlines
 
