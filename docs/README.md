@@ -10,7 +10,9 @@ Enter `list` into the command line to view existing tasks
 
 ## Exitting and Saving
 Enter `bye` into the command line to exit application. 
-Doing so will also save all changes made to your tasks
+Doing so will also save all changes made to your tasks.
+Be careful not to force exit the application, as this will not save any changes.
+The only way to save any changes is using `bye`
 
 
 ## Adding ToDos
@@ -24,6 +26,7 @@ Example: `todo submit Shrek`
 
 If no input errors have occurred, this is the expected output:
 > blablabla
+viewing `list` should also show that your changes have been implemented into the tasklist
 
 
 ## Adding Deadlines
@@ -37,6 +40,7 @@ Example: `deadline submit Shrek /by Fri, Mar 14th 2359`
 
 If no input errors have occurred, this is the expected output:
 > blablabla
+Viewing `list` should also show that your changes have been implemented into the tasklist
 
 
 ## Adding Events
@@ -50,13 +54,41 @@ Example: `event work on Shrek /from Today to Fri, Mar 14th 2359`
 
 If no input errors have occurred, this is the expected output:
 > blablabla
+Viewing `list` should also show that your changes have been implemented into the tasklist
 
 
-## Marking Events
+## Marking / Unmarking Task
+If you wish to mark on unmark a task on the list, you need to know the index of the task
+It may be useful to use `list` to confirm the index of the task prior to marking / unmarking
 
-// Feature details
+Enter `mark [index]` or `unmark [index]` to mark or unmark the task
+
+Example: `mark 2` or `unmark 2`
+
+If no input errors have occurred, this is the expected output:
+> blablabla
+Viewing `list` should also show that your changes have been implemented into the tasklist
+
+## Deleting Task
+If you wish to remove a task from the list, you need to know the index of the task
+It may be useful to use `list` to confirm the index of the task prior to deleting
+
+Enter `delete [index]` to delete the task
+
+Example: `delete 1`
+
+If no input errors have occurred, this is the expected output:
+> blablabla
+Viewing `list` should also show that your changes have been implemented into the tasklist
 
 
-## Feature XYZ
+## Finding Tasks
+You can search for all tasks in your tsklist that have a specified key
 
-// Feature details
+Enter `find [key]` into the command line to search,
+replace [key] with the actual name of the key.
+
+Example: `key Shrek` 
+
+If no input errors have occurred, this is the expected output:
+> blablabla
