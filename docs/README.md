@@ -25,7 +25,10 @@ replace [name] with the actual name of the task
 Example: `todo submit Shrek` 
 
 If no input errors have occurred, this is the expected output:
-> blablabla
+> Aye, got it lad! Here's your input
+[T][ ] submit Shrek
+Yer now got 1 tasks in yer list
+
 viewing `list` should also show that your changes have been implemented into the tasklist
 
 
@@ -39,7 +42,10 @@ replace [name] and [time] with the actual name and time of the task
 Example: `deadline submit Shrek /by Fri, Mar 14th 2359` 
 
 If no input errors have occurred, this is the expected output:
-> blablabla
+> Aye, got it lad! Here's your input
+[D][ ] submit Shrek (by: Fri, Mar 14th 2359)
+Yer now got 2 tasks in yer list
+
 Viewing `list` should also show that your changes have been implemented into the tasklist
 
 
@@ -53,7 +59,10 @@ replace [name] and [time] with the actual name and time of the task
 Example: `event work on Shrek /from Today to Fri, Mar 14th 2359` 
 
 If no input errors have occurred, this is the expected output:
-> blablabla
+> Aye, got it lad! Here's your input
+[E][ ] work on Shrek (from: Today to Fri, Mar 14th 2359)
+Yer now got 3 tasks in yer list
+
 Viewing `list` should also show that your changes have been implemented into the tasklist
 
 
@@ -66,7 +75,8 @@ Enter `mark [index]` or `unmark [index]` to mark or unmark the task
 Example: `mark 2` or `unmark 2`
 
 If no input errors have occurred, this is the expected output:
-> blablabla
+> Roger that! Consider task 2 marked.
+
 Viewing `list` should also show that your changes have been implemented into the tasklist
 
 ## Deleting Task
@@ -78,7 +88,10 @@ Enter `delete [index]` to delete the task
 Example: `delete 1`
 
 If no input errors have occurred, this is the expected output:
-> blablabla
+> Aye, got it lad! Here's what I deleted
+[T][ ] submit Shrek
+Yer now got 2 tasks in yer list
+
 Viewing `list` should also show that your changes have been implemented into the tasklist
 
 
@@ -88,7 +101,10 @@ You can search for all tasks in your tsklist that have a specified key
 Enter `find [key]` into the command line to search,
 replace [key] with the actual name of the key.
 
-Example: `key Shrek` 
+Example: `find Shrek` 
 
 If no input errors have occurred, this is the expected output:
-> blablabla
+> HERE ARE ALL THE TASKS THAT CONTAIN "Shrek"
+1.[T][ ] submit Shrek
+2.[D][X] submit Shrek (by: Fri, Mar 14th 2359)
+3.[E][ ] work on Shrek (from: Today to Fri, Mar 14th 2359)
