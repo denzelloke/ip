@@ -1,6 +1,6 @@
 # Duke User Guide
 
-// Update the title above to match the actual product name
+// Update the title above to match the actual product namezzz
 
 // Product screenshot goes here
 
