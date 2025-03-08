@@ -1,8 +1,5 @@
 package Shrek.UI;
 
-import java.io.IOException;
-import java.util.Scanner;
-
 import Shrek.data.WriteData;
 import Shrek.exceptions.InvalidIndexException;
 import Shrek.exceptions.InvalidNameException;
@@ -13,12 +10,12 @@ import Shrek.features.Deadline;
 import Shrek.features.Event;
 import Shrek.features.Task;
 import Shrek.features.Todo;
+import java.io.IOException;
+import java.util.Scanner;
 
 public class InPro {
-    
+
     public static int indexOffset = 1;
-    public InPro() {
-    }
 
     public static Object parse(String input, String command) throws InvalidNameException, InvalidSplitException, InvalidTimeException, NumberFormatException {
         switch (command) {
@@ -37,12 +34,14 @@ public class InPro {
             case "delete", "mark", "unmark" -> {
                 return parseIndex(input);
             }
-            default -> throw new IllegalArgumentException("Invalid command: " + command);
+            default ->
+                throw new IllegalArgumentException("Invalid command: " + command);
         }
     }
 
     public static String parseName(String input) throws InvalidNameException {
-        int nameIndex = 5; //"T-O-D-O-X"
+        //5 char offset for "T-O-D-O-X" or "F-I-N-D-X"
+        int nameIndex = 5;
         if (input.length() <= nameIndex) {
             throw new InvalidNameException();
         }
@@ -91,9 +90,8 @@ public class InPro {
             int positionOfIndex = input.indexOf(" ");
             String indexStr = input.substring(positionOfIndex + 1).trim(); // Extract the part after command
             int index = Integer.parseInt(indexStr);
-            return index-indexOffset;
-        }
-        catch (NumberFormatException e) {
+            return index - indexOffset;
+        } catch (NumberFormatException e) {
             InvalidIndexException.handle();
         }
         return -1;
@@ -109,51 +107,80 @@ public class InPro {
                 //LIST
                 if (input.equals("list")) {
                     Printer.showList(tasks, Task.tailIndex);
-                } //MARK
-                else if (input.startsWith("mark ")) {
-                    int indexToMark = InPro.parseIndex(input);
-                    if (tasks[indexToMark] == null) {
-                        throw new InvalidIndexException();
+                } else {
+
+                    // Extract the first word from input as the command
+                    String[] inputParts = input.split(" ", 2);
+                    String command = inputParts[0];
+                    
+                    
+                    switch (command) {
+                        case "mark" -> {
+                            int indexToMark = parseIndex(input);
+                            if (tasks[indexToMark] == null) {
+                                throw new InvalidIndexException();
+                            }
+                            Task.markTask(tasks, input, indexToMark);
+                            break;
+                        }
+
+                        case "unmark" -> {
+                            int indexToUnmark = parseIndex(input);
+                            if (tasks[indexToUnmark] == null) {
+                                throw new InvalidIndexException();
+                            }
+                            Task.unmarkTask(tasks, input, indexToUnmark);
+                            break;
+                        }
+
+                        case "todo" -> {
+                            String name = parseName(input);
+                            tasks[Task.tailIndex] = new Todo(name);
+                            Printer.acknowledge(tasks, Task.tailIndex);
+                            Task.tailIndex++;
+                            break;
+                        }
+
+                        case "deadline" -> {
+                            String[] nameTime = parseNameTime(input, 0); // 0 for deadline
+                            tasks[Task.tailIndex] = new Deadline(nameTime);
+                            Printer.acknowledge(tasks, Task.tailIndex);
+                            Task.tailIndex++;
+                            break;
+                        }
+
+                        case "event" -> {
+                            String[] eventDetails = parseNameTime(input, 1); // 1 for event
+                            tasks[Task.tailIndex] = new Event(eventDetails);
+                            Printer.acknowledge(tasks, Task.tailIndex);
+                            Task.tailIndex++;
+                            break;
+                        }
+
+                        case "delete" -> {
+                            Task.tailIndex--;
+                            int indexToDelete = parseIndex(input);
+                            if (indexToDelete < 0 || indexToDelete >= Task.tailIndex) {
+                                throw new InvalidIndexException();
+                            }
+                            Printer.ackDelete(tasks, indexToDelete, Task.tailIndex);
+                            Task.deleteTask(tasks, indexToDelete);
+                            break;
+                        }
+
+                        case "find" -> {
+                            String key = parseName(input);
+                            Printer.printMatches(tasks, Task.tailIndex, key);
+
+                            break;
+                        }
+
+                            
+                        default -> throw new InvalidTagException();
                     }
-                    Task.markTask(tasks, input, indexToMark);
-                } //UNMARK
-                else if (input.startsWith("unmark ")) {
-                    int indexToUnmark = InPro.parseIndex(input);
-                    if (tasks[indexToUnmark] == null) {
-                        throw new InvalidIndexException();
-                    }
-                    Task.unmarkTask(tasks, input, indexToUnmark);
-                } //TODO
-                else if (input.startsWith("todo ")) {
-                    String name = InPro.parseName(input);
-                    tasks[Task.tailIndex] = new Todo(name);
-                    Printer.acknowledge(tasks, Task.tailIndex);
-                    Task.tailIndex++;
-                } //DEADLINE
-                else if (input.startsWith("deadline ")) {
-                    String[] nameTime = InPro.parseNameTime(input, 0); //0 for deadline
-                    tasks[Task.tailIndex] = new Deadline(nameTime);
-                    Printer.acknowledge(tasks, Task.tailIndex);
-                    Task.tailIndex++;
-                } //EVENT
-                else if (input.startsWith("event ")) {
-                    String[] nameTime = InPro.parseNameTime(input, 1); //1 for event
-                    tasks[Task.tailIndex] = new Event(nameTime);
-                    Printer.acknowledge(tasks, Task.tailIndex);
-                    Task.tailIndex++;
-                } //delete
-                else if (input.startsWith("delete ")) {
-                    Task.tailIndex--;
-                    int indexToDelete = InPro.parseIndex(input);
-                    if (indexToDelete < 0 || indexToDelete >= Task.tailIndex) {
-                        throw new InvalidIndexException();
-                    }
-                    Printer.ackDelete(tasks, indexToDelete, Task.tailIndex);
-                    Task.deleteTask(tasks, indexToDelete);
-                } //invalid input
-                else {
-                    throw new InvalidTagException();
-                }
+
+}
+                
             } catch (InvalidTagException e) {
                 InvalidTagException.handle();
             } catch (InvalidNameException e) {

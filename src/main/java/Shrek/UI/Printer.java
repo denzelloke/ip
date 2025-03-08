@@ -1,5 +1,7 @@
 package Shrek.UI;
+
 import Shrek.features.Task;
+
 public class Printer {
 
     static int indexOffset = 1;
@@ -70,7 +72,7 @@ public class Printer {
         System.out.println("\n" + LINEBREAK);
         System.out.println("Aye, got it lad! Here's your input");
         System.out.println(tasks[taskIndex].toString());
-        System.out.print("Yer now got " + (taskIndex+indexOffset) + " tasks in yer list");
+        System.out.print("Yer now got " + (taskIndex + indexOffset) + " tasks in yer list");
         System.out.println("\n" + LINEBREAK + "\n");
     }
 
@@ -82,17 +84,28 @@ public class Printer {
         System.out.println("\n" + LINEBREAK + "\n");
     }
 
-     public static void errorMsg() {
+    public static void errorMsg() {
         System.out.println(LINEBREAK);
         System.out.println("INVALID INPUT! TRY AGAIN");
         System.out.println(LINEBREAK + "\n");
     }
 
-     public static void ackSave() {
+    public static void ackSave() {
         System.out.println(LINEBREAK);
         System.out.println("Tasks saved successfully!");
         System.out.println(LINEBREAK + "\n");
     }
-}
 
-//
+    public static void printMatches(Task[] tasks, int taskIndex, String key) {
+        System.out.println("\n" + LINEBREAK);
+        System.out.println("HERE ARE ALL THE TASKS THAT CONTAIN \"" + key + "\"");
+
+        for (int j = 0; j < taskIndex; j++) {
+            if (tasks[j].name.contains(key)) {
+                System.out.print(j + indexOffset + ".");
+                System.out.println(tasks[j].toString());
+            }
+        }
+        System.out.println(LINEBREAK + "\n");
+    }
+}
