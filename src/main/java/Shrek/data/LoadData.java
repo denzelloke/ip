@@ -1,3 +1,13 @@
+/**
+ * Handles loading of tasks from a saved file.
+ * <p>
+ * This class is responsible for reading stored tasks from a specified file
+ * and converting them back into {@link Task} objects.
+ *  
+ * If no previous save file exists, it creates a new one.
+ * </p>
+ */
+
 package Shrek.data;
 
 import Shrek.features.Deadline;

@@ -1,3 +1,13 @@
+/**
+ * Handles saving of tasks to a file.
+ * <p>
+ * This class writes the current task list to a file, ensuring that the data
+ * persists between sessions. 
+ * 
+ * Tasks are formatted as strings before being stored.
+ * </p>
+ */
+
 package Shrek.data;
 
 import Shrek.features.Task;

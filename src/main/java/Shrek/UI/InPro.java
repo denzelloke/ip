@@ -1,3 +1,16 @@
+/**
+ * Handles the processing of all user inputs.
+ * This class has the processManager, which iteratively takes user input 
+ * and decides which follow up actions to take (eg adding, deleting, and marking tasks)
+ * <p>
+ * The processManager is assisted by various parsers. 
+ * These parsers extract useful information from user input, and serve as preliminary exception detectors.
+ * 
+ * It interacts with {@link Shrek.features.Task} and its subclasses ({@link Shrek.features.Todo},
+ * {@link Shrek.features.Deadline}, {@link Shrek.features.Event}).
+ * </p>
+ */
+
 package Shrek.UI;
 
 import Shrek.UI.InPro.CommandType;

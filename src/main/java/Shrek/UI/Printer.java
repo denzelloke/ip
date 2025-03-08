@@ -1,3 +1,14 @@
+/**
+ * Provides helper methods for displaying messages to the user.
+ * <p>
+ * The Printer class is responsible for formatting and printing output 
+ * to the console. 
+ * It handles greeting, error messages, task lists, 
+ * confirmations for actions such as adding or deleting tasks, and search results.
+ * It also holds the constant values of LINEBREAK and LOGO
+ * </p>
+ */
+
 package Shrek.UI;
 
 import Shrek.features.Task;
@@ -6,7 +17,7 @@ public class Printer {
 
     static int indexOffset = 1;
     public static String LINEBREAK = "________________________________________________________________________________";
-    public static String logo
+    public static String LOGO
             = """
                 
                 #                            ,.--------._                                            #
@@ -46,7 +57,7 @@ public class Printer {
 
     public static void greet() {
         System.out.println(LINEBREAK);
-        System.out.println("Aye welcome to me swap lad!\n" + logo + "\nWha can I du fuh ya?");
+        System.out.println("Aye welcome to me swap lad!\n" + LOGO + "\nWha can I du fuh ya?");
         System.out.println(LINEBREAK + "\n");
     }
 

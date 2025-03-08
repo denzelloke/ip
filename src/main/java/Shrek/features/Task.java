@@ -1,3 +1,16 @@
+/**
+ * Represents a generic task.
+ * <p>
+ * This abstract class serves as a base class for specific types of tasks: 
+ * {@link Todo}, {@link Deadline}, and {@link Event}.
+ * 
+ * It provides common attributes
+ * such as task name and completion status and includes methods for marking and unmarking tasks.
+ * 
+ * The Task objects are not created, only their children objects.
+ * </p>
+ */
+
 package Shrek.features;
 
 

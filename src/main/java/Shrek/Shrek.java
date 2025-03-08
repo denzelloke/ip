@@ -1,3 +1,12 @@
+/**
+ * Entry point for the Shrek chatbot.
+ * <p>
+ * It initialises a Shrek object by loading into the tasks variable.
+ * then it prints a greet statement, goes into the processManager found in {@link Shrek.UI.InPro},
+ * and finally prints an exit statement before terminating.
+ * </p>
+ */
+
 package Shrek;
 
 import Shrek.UI.InPro;

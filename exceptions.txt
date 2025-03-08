@@ -1,5 +1,0 @@
-deadline/event dont have /by or /from
-IMPROPER NAME INPUT deadline/event dont have anyth in btwn command word and /by
-IMPROPER TIME INPUT todo/deadline/event dont have anyth after /by               
-
-INVALID TAG         invalid command word. accepted - Deadline,Event,Todo, OG tasks prolly not accepted anym

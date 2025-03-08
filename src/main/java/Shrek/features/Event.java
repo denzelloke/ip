@@ -1,3 +1,13 @@
+/**
+ * An event object has a name and a "from" date/time, 
+ * for users to specify when their event starts from
+ * 
+ * <p>
+ * it is printed with a "[E]" tag, and the "from" time is always printed
+ * in this manner "(from: [time])"
+ * <p/>
+ */
+
 package Shrek.features;
 
 
