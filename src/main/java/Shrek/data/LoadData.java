@@ -77,7 +77,7 @@ public class LoadData {
         try {
 
             if (input.startsWith("[T]")) {
-                String name = input.substring(6); // Remove the "[T] [ ] " or "[T] [X] " prefix
+                String name = input.substring(6).trim(); // Remove the "[T] [ ] " or "[T] [X] " prefix
                 newTask = new Todo(name);
             } else if (input.startsWith("[D]")) {
                 int timeIndex = input.indexOf("(by: ") + 5;
