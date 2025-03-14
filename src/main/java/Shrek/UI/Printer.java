@@ -57,7 +57,7 @@ public class Printer {
 
     public static void greet() {
         System.out.println(LINEBREAK);
-        System.out.println("Aye welcome to me swap lad!\n" + LOGO + "\nWha can I du fuh ya?");
+        System.out.println("Aye welcome to me swamp lad!\n" + LOGO + "\nWha can I du for ya?");
         System.out.println(LINEBREAK + "\n");
     }
 
@@ -109,13 +109,13 @@ public class Printer {
 
     public static void ackMark(int index) {
         System.out.println(LINEBREAK);
-        System.out.println("Roger that! Consider task" + index + "marked");
+        System.out.println("Roger that! Consider task " + (index+1) + " marked");
         System.out.println(LINEBREAK + "\n");
     }
 
     public static void ackUnmark(int index) {
         System.out.println(LINEBREAK);
-        System.out.println("Roger that! Consider task " + (index+1) + "unmarked ");
+        System.out.println("Roger that! Consider task " + (index+1) + " unmarked ");
         System.out.println(LINEBREAK + "\n");
     }
 

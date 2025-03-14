@@ -15,11 +15,12 @@ import Shrek.data.LoadData;
 import Shrek.exceptions.InvalidIndexException;
 import Shrek.exceptions.InvalidTagException;
 import Shrek.features.Task;
+import java.io.File;
 
 public class Shrek {
 
     private static final int MAX_TASKS = 100;
-    private static final String FILEPATH = "Shrek/data/save.txt";
+    private static final String FILEPATH = new File(System.getProperty("user.dir"), "save.txt").getAbsolutePath();
     public static Task[] tasks = new Task[MAX_TASKS];
 
     
