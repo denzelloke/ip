@@ -70,6 +70,9 @@ public class Task {
     }
     
     public static void deleteTask(Task[] tasks, int indexToDelete) {
+        if (indexToDelete == tasks.length) {
+            return;
+        }
         for (int i=indexToDelete; i<tasks.length-indexOffset; i++) {
             tasks[i] = tasks[i+1];
         }

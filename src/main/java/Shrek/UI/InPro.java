@@ -31,6 +31,13 @@ public class InPro {
 
     public static int indexOffset = 1;
 
+    /**
+     * Extracts the index portion from user input for commands like "mark", "unmark", or "delete".
+     *
+     * @param input The user input string.
+     * @return Zero-based index of the task.
+     * @throws NumberFormatException if the input index is missing or not a number.
+     */
     public static int parseIndex(String input) throws NumberFormatException {
         int positionOfIndex = input.indexOf(" ");
         if (positionOfIndex == -1) {
@@ -41,6 +48,13 @@ public class InPro {
         return index - indexOffset;
     }
 
+    /**
+     * Extracts the name portion from user input for commands like "todo" or "find".
+     *
+     * @param input The user input string.
+     * @return The extracted task name or keyword.
+     * @throws InvalidNameException if no name is provided.
+     */
     public static String parseName(String input) throws InvalidNameException {
         //5 char offset for "T-O-D-O-X" or "F-I-N-D-X"
         int nameIndex = 5;
@@ -55,6 +69,16 @@ public class InPro {
         DEADLINE, EVENT
     }
 
+    /**
+     * Extracts the name and time from user input for "deadline" or "event" commands.
+     *
+     * @param input The user input string.
+     * @param cmd   The command type: DEADLINE or EVENT.
+     * @return A string array containing the name (index 0) and time (index 1).
+     * @throws InvalidSplitException if the time delimiter (/by or /from) is missing.
+     * @throws InvalidTimeException  if the time portion is missing.
+     * @throws InvalidNameException  if the name portion is missing.
+     */
     public static String[] parseNameTime(String input, CommandType cmd) throws InvalidSplitException, InvalidTimeException, InvalidNameException {
         String[] nameTime = new String[2];
 
@@ -91,6 +115,14 @@ public class InPro {
         return nameTime;
     }
 
+    /**
+     * Continuously accepts and processes user input commands until "bye" is entered.
+     * Handles commands like list, mark, unmark, todo, deadline, event, delete, and find.
+     * Saves tasks to file before exiting.
+     *
+     * @param tasks     The array of Task objects.
+     * @param FILEPATH  The file path used to save tasks on exit.
+     */
     public static void processManager(Task[] tasks, String FILEPATH) {
         Scanner in = new Scanner(System.in);
         String input = in.nextLine();
@@ -152,12 +184,12 @@ public class InPro {
 
                         case "delete" -> {
                             int indexToDelete = parseIndex(input);
-                            if (indexToDelete < 0 || indexToDelete > Task.tailIndex) {
+                            if (indexToDelete < 0 || indexToDelete > Task.tailIndex-indexOffset) {
                                 throw new InvalidIndexException();
                             } else {
-                                Task.tailIndex--;
                                 Printer.ackDelete(tasks, indexToDelete, Task.tailIndex);
                                 Task.deleteTask(tasks, indexToDelete);
+                                Task.tailIndex--;
                             }
                             break;
                         }

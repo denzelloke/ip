@@ -25,12 +25,20 @@ public class LoadData {
     private static Task[] tasks = new Task[MAX_TASKS];
     private final String FILEPATH;
 
-    // Constructor to receive main task list and index
+    /**
+     * Constructs a LoadData object with the specified file path.
+     *
+     * @param FILEPATH The path to the save file.
+     */
     public LoadData(String FILEPATH) {
         this.FILEPATH = FILEPATH;
     }
 
-    // Creates or loads a save file
+    /**
+     * Loads tasks from the save file if it exists, or creates a new save file otherwise.
+     *
+     * @return An array of Task objects either loaded or initialized.
+     */
     public Task[] loadOrCreateFile() {
         File file = new File(FILEPATH);
         try {
@@ -47,7 +55,11 @@ public class LoadData {
         return tasks;
     }
 
-    // Loads tasks from the save file by simulating user input
+    /**
+     * Reads each line from the save file and reconstructs task objects.
+     *
+     * @return An array of Task objects loaded from the file.
+     */
     public Task[] loadTasksFromFile() {
         try {
             File file = new File(FILEPATH);
@@ -57,7 +69,7 @@ public class LoadData {
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
                 System.out.println("Loading: " + line);
-                tasks[currLine] = processCommand(line); // Process each line as if it's user input
+                tasks[currLine] = processCommand(line);
                 currLine++;
             }
 
@@ -68,16 +80,14 @@ public class LoadData {
         } catch (Exception e) {
             System.out.println("Error loading tasks: " + e.getMessage());
         }
-        return tasks; // Return updated tasks array after processing all lines
+        return tasks;
     }
 
-    // Processes user commands
     private Task processCommand(String input) {
-        Task newTask = null; // Create a temporary Task variable
+        Task newTask = null;
         try {
-
             if (input.startsWith("[T]")) {
-                String name = input.substring(6).trim(); // Remove the "[T] [ ] " or "[T] [X] " prefix
+                String name = input.substring(6).trim();
                 newTask = new Todo(name);
             } else if (input.startsWith("[D]")) {
                 int timeIndex = input.indexOf("(by: ") + 5;
@@ -92,7 +102,6 @@ public class LoadData {
             }
 
             Task.tailIndex++;
-            // Mark task as completed if "[X]" exists
             if (input.substring(3, 6).equals("[X]")) {
                 newTask.markTask();
             }
@@ -101,5 +110,4 @@ public class LoadData {
         }
         return newTask;
     }
-
 }

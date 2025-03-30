@@ -16,6 +16,14 @@ import java.io.IOException;
 
 public class WriteData {
     
+    /**
+     * Overwrites the file at the given path with the string representations of all tasks.
+     *
+     * @param filePath   The path of the file to write to.
+     * @param tasks      The array of tasks to save.
+     * @param tailIndex  The number of valid tasks to write.
+     * @throws IOException If an I/O error occurs during writing.
+     */
     public static void overwriteFile(String filePath, Task[] tasks, int tailIndex) throws IOException {
         FileWriter scribe = new FileWriter(filePath); // Overwrites file
 

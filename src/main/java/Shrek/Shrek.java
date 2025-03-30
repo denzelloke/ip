@@ -23,19 +23,31 @@ public class Shrek {
     private static final String FILEPATH = new File(System.getProperty("user.dir"), "save.txt").getAbsolutePath();
     public static Task[] tasks = new Task[MAX_TASKS];
 
-    
+    /**
+     * Constructs a new Shrek instance and loads tasks from the save file.
+     */
     public Shrek() {
         LoadData load = new LoadData(FILEPATH);
         this.tasks = load.loadOrCreateFile();
     }
 
-
+     /**
+     * Starts the chatbot session by greeting the user,
+     * running the input processing loop, and exiting gracefully.
+     */
     public void run() {
         Printer.greet();
         InPro.processManager(tasks, FILEPATH);
         Printer.bye();
     }
 
+    /**
+     * Main method to launch the Shrek chatbot.
+     *
+     * @param args Command-line arguments (not used).
+     * @throws InvalidTagException   if the user inputs an unknown command.
+     * @throws InvalidIndexException if the user provides an invalid task index.
+     */
     public static void main(String[] args) throws InvalidTagException, InvalidIndexException {
         Shrek currChat = new Shrek();
         currChat.run();
