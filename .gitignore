@@ -22,4 +22,6 @@ text-ui-test/EXPECTED-UNIX.TXT
 
 
 
-".gradle/" 
+# Ignore all Gradle caches and generated files
+.gradle/
+*.ser
