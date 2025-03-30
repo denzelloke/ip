@@ -37,7 +37,7 @@ public class Shrek {
      */
     public void run() {
         Printer.greet();
-        InPro.processManager(tasks, FILEPATH);
+        ProcessManager.start(tasks, FILEPATH);
         Printer.bye();
     }
 

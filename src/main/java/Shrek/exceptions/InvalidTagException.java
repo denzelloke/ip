@@ -5,6 +5,14 @@ public class InvalidTagException extends Exception {
     }
 
     public static void handle() {
-         System.err.println("\nC'mon Lad, here are the valid commands: \n1. deadline [description] /by [time] \n2. event [description] /from [time]\n3. todo [description] \n4. mark/unmark [index] \n5. list \n6. bye \nKEEP TO EM LAD \n");
+         System.err.println("\nC'mon Lad, here are the valid commands: \n" +
+                 "1. deadline [description] /by [time] \n" +
+                 "2. event [description] /from [time]\n" +
+                 "3. todo [description] \n" +
+                 "4. mark/unmark [index] \n" +
+                 "5. list \n" +
+                 "6. find [keyword] \n" +
+                 "7. bye \n" +
+                 "KEEP TO EM LAD \n");
     }
 }
